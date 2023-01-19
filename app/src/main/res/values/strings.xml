@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Trace</string>
+    <string name="welcome_message">L\'unica applicazione che ti permette di scoprire i posti interessanti della tua città</string>
+    <string name="login">Accedi</string>
+    <string name="search_description">Ricerca</string>
+    <string name="search_hint">Cerca una località</string>
+    <string name="launch_maps">Avvia navigatore</string>
+    <string name="back_description">Torna indietro</string>
+
+    <string name="greeting1">Buongiorno</string>
+    <string name="greeting2">Buon pomeriggio</string>
+    <string name="greeting3">Buonasera</string>
+
+    <string name="all">Tutti</string>
+    <string name="restaurant">Ristorante</string>
+    <string name="cafe">Cafè</string>
+    <string name="park">Parco</string>
+    <string name="cinema">Cinema</string>
+    <string name="family">Per la famiglia</string>
+    <string name="pizzeria">Pizzeria</string>
+    <string name="pub">Pub</string>
+
+</resources>
