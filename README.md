@@ -12,9 +12,16 @@ This section provides the full list of places in the app and gives the user the 
 This page shows the user all the details of the selected place.
 There is a button at the bottom of the screen to start Google Maps for navigating to the desired location.
 
+# Design
 
-![Design](https://user-images.githubusercontent.com/32841796/206695315-ec69bc17-2327-4d18-96f1-a0bc0736d7c6.png)
+### Light Theme
+![image](https://user-images.githubusercontent.com/32841796/213566845-4c7a096a-c1fc-428d-9831-4fe01dfbeabd.png)
 
-<sub>*This application must not be considered a final product but a way to showcase a small project functionalities</sub>
+### Dark Theme
+![image](https://user-images.githubusercontent.com/32841796/213566873-e0aa5a63-e619-480e-a174-3efb291bb6c2.png)
+
+
+
+<sub>*This application must not be considered a final product but a way to showcase a project</sub>
 
 
