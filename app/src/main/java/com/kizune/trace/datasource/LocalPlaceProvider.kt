@@ -81,7 +81,7 @@ object LocalPlaceProvider {
 
         Place(
             image = R.drawable.cinema2,
-            name = "Cinema San Demento",
+            name = "Cinema San Demetrio",
             category = PlaceCategory.CINEMA.label,
             address = "Via Dalmazia, 4",
             phone = "089220489",
