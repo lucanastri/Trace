@@ -18,8 +18,8 @@ import kotlin.math.floor
 fun RatingBar(
     rating: Double,
     stars: Int,
-    starsColor: Color = colorResource(id = R.color.star_filled),
     modifier: Modifier = Modifier,
+    starsColor: Color = colorResource(id = R.color.star_filled),
     showUnfilledStar: Boolean = false
 ) {
     val filledStars = floor(rating).toInt()

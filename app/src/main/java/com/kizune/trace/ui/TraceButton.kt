@@ -1,10 +1,7 @@
 package com.kizune.trace.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,8 +15,10 @@ fun TraceButton(
 ) {
     Button(
         onClick = onClick,
-        colors = ButtonDefaults
-            .buttonColors(),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.primary,
+            contentColor = MaterialTheme.colors.onPrimary
+        ),
         elevation = ButtonDefaults.elevation(
             pressedElevation = 0.dp,
             disabledElevation = 0.dp,
@@ -31,7 +30,7 @@ fun TraceButton(
     ) {
         Text(
             text = stringResource(id = text),
-            style = MaterialTheme.typography.h4,
+            style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onPrimary
         )
     }

@@ -8,8 +8,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.kizune.trace.R
 
-// Set of Material typography styles to start with
-
 val Heebo = FontFamily(
     Font(R.font.heebo_regular),
     Font(R.font.heebo_bold, FontWeight.Bold)

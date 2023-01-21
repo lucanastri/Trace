@@ -2,7 +2,7 @@ package com.kizune.trace.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -15,22 +15,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.kizune.trace.model.PlaceCategory
-import com.kizune.trace.model.getAllCategories
 
 @Composable
 fun TraceChipGroup(
-    categories: List<PlaceCategory> = getAllCategories(),
-    selectedCategory: PlaceCategory? = null,
+    selectedCategory: Int,
     onSelectionChanged: (Int) -> Unit
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
-        items(categories) { category ->
+        itemsIndexed(enumValues<PlaceCategory>()) { index, category ->
             TraceChip(
                 item = category,
-                isSelected = selectedCategory == category,
+                isSelected = index == selectedCategory,
                 onSelectionChanged = { selection ->
                     onSelectionChanged(selection)
                 },
@@ -60,7 +58,7 @@ fun TraceChip(
                 .toggleable(
                     value = isSelected,
                     onValueChange = {
-                        onSelectionChanged(item.label)
+                        onSelectionChanged(item.ordinal)
                     }
                 )
                 .padding(

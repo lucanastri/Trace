@@ -1,8 +1,6 @@
 package com.kizune.trace.ui
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
@@ -12,57 +10,40 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.kizune.trace.R
 import com.kizune.trace.datasource.LocalPlaceProvider.placesList
 import com.kizune.trace.model.Place
 import com.kizune.trace.model.PlaceCategory
 
-@Composable
-fun TracePlaceList(
-    onItemSelected: (Place) -> Unit,
-    searchFilter: MutableState<TextFieldValue>,
-    chipFilter: MutableState<PlaceCategory?> ,
-    modifier: Modifier = Modifier
-) {
-    val items by remember { mutableStateOf(placesList) }
-
-    var filteredItems: List<Place>
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(16.dp),
-        modifier = modifier.fillMaxWidth()
-    ) {
-        val searchedText = searchFilter.value.text
-        filteredItems = if (searchedText.isEmpty()) {
-            placesList.filter {
-                it.category == chipFilter.value?.label
-                        || chipFilter.value?.label == R.string.all
-            }
-        } else {
-            val resultList = ArrayList<Place>()
-            for (item in items) {
-                if (item.name.lowercase().contains(searchedText.lowercase())) {
-                    resultList.add(item)
-                }
-            }
-            resultList.filter {
-                it.category == chipFilter.value?.label
-                    || chipFilter.value?.label == R.string.all
+fun filteredList(
+    items: List<Place>,
+    searchedText: String,
+    selectedCategory: Int
+): List<Place> {
+    val filteredItems = if (searchedText.isEmpty()) {
+        placesList.filter { place ->
+            place.category == enumValues<PlaceCategory>()[selectedCategory].label
+                    || enumValues<PlaceCategory>()[selectedCategory].label == R.string.all
+        }
+    } else {
+        val resultList = ArrayList<Place>()
+        for (item in items) {
+            if (item.name.lowercase().contains(searchedText.lowercase())) {
+                resultList.add(item)
             }
         }
-
-        items(filteredItems) { filteredItem ->
-            PlaceItem(
-                item = filteredItem,
-                onItemSelected = onItemSelected
-            )
+        resultList.filter { place ->
+            place.category == enumValues<PlaceCategory>()[selectedCategory].label
+                    || enumValues<PlaceCategory>()[selectedCategory].label == R.string.all
         }
     }
+    return filteredItems
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -89,7 +70,11 @@ fun PlaceItem(
                 .padding(16.dp)
         ) {
             AsyncImage(
-                model = item.image,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(item.image)
+                    .crossfade(true)
+                    .build(),
+                placeholder = asyncImagePlaceholder(placeholder = item.image),
                 contentDescription = null,
                 modifier = Modifier
                     .size(96.dp)
