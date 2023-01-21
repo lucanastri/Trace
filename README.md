@@ -15,12 +15,20 @@ There is a button at the bottom of the screen to start Google Maps for navigatin
 # Design
 
 ### Light Theme
-![image](https://user-images.githubusercontent.com/32841796/213566845-4c7a096a-c1fc-428d-9831-4fe01dfbeabd.png)
+#### Compact
+![image](https://user-images.githubusercontent.com/32841796/213874484-6a5b2fe2-285f-49ea-b538-6f9cefcd960d.png)
+#### Medium
+![image](https://user-images.githubusercontent.com/32841796/213874560-6674f275-8bd2-4b7f-b322-f03b0772d31e.png)
+#### Expanded
+![image](https://user-images.githubusercontent.com/32841796/213874584-600b6c10-43fe-4d09-bdeb-08acf7541b47.png)
 
 ### Dark Theme
-![image](https://user-images.githubusercontent.com/32841796/213566873-e0aa5a63-e619-480e-a174-3efb291bb6c2.png)
-
-
+#### Compact
+![image](https://user-images.githubusercontent.com/32841796/213874643-a6601174-d680-4963-b6fe-96076cacf867.png)
+#### Medium
+![image](https://user-images.githubusercontent.com/32841796/213874648-9acf1261-56bc-42fb-8a56-88118e482689.png)
+#### Expanded
+![image](https://user-images.githubusercontent.com/32841796/213874663-e3ba6ab0-4d7c-496b-be48-c84450c00456.png)
 
 <sub>*This application must not be considered a final product but a way to showcase a project</sub>
 
