@@ -22,10 +22,11 @@ enum class PlaceCategory(
 data class Place(
     @DrawableRes val image: Int,
     val name: String,
-    @StringRes val category: Int,
+    val category: PlaceCategory,
     val address: String,
     val phone: String?,
     val description: String,
-    val location: Location,
+    val latitude: Double,
+    val longitude: Double,
     val rating: Double
 )

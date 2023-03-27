@@ -21,31 +21,6 @@ import com.kizune.trace.datasource.LocalPlaceProvider.placesList
 import com.kizune.trace.model.Place
 import com.kizune.trace.model.PlaceCategory
 
-fun filteredList(
-    items: List<Place>,
-    searchedText: String,
-    selectedCategory: Int
-): List<Place> {
-    val filteredItems = if (searchedText.isEmpty()) {
-        placesList.filter { place ->
-            place.category == enumValues<PlaceCategory>()[selectedCategory].label
-                    || enumValues<PlaceCategory>()[selectedCategory].label == R.string.all
-        }
-    } else {
-        val resultList = ArrayList<Place>()
-        for (item in items) {
-            if (item.name.lowercase().contains(searchedText.lowercase())) {
-                resultList.add(item)
-            }
-        }
-        resultList.filter { place ->
-            place.category == enumValues<PlaceCategory>()[selectedCategory].label
-                    || enumValues<PlaceCategory>()[selectedCategory].label == R.string.all
-        }
-    }
-    return filteredItems
-}
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PlaceItem(
@@ -93,7 +68,7 @@ fun PlaceItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = stringResource(id = item.category),
+                    text = stringResource(id = item.category.label),
                     style = MaterialTheme.typography.h6,
                     color = MaterialTheme.colors.onSurface,
                     maxLines = 1,
@@ -101,7 +76,6 @@ fun PlaceItem(
                 )
                 RatingBar(
                     rating = item.rating,
-                    stars = 4,
                     modifier = Modifier.padding(top = 16.dp)
                 )
             }

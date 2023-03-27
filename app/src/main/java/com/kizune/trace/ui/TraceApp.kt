@@ -29,10 +29,6 @@ enum class TraceScreen {
     Place
 }
 
-/**
- * Entry point dell'app per permettere la navigazione tra i vari screen
- */
-
 @Composable
 fun TraceApp(
     onBackClicked: () -> Unit,

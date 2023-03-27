@@ -1,9 +1,12 @@
 package com.kizune.trace.ui
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -151,7 +154,7 @@ fun PlaceScreenContentHeading(
             )
         }
         Text(
-            text = stringResource(id = place.category),
+            text = stringResource(id = place.category.label),
             style = MaterialTheme.typography.h6,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.padding(top = 8.dp)
@@ -208,15 +211,19 @@ fun PlaceScreenContentBottom(
 /**
  * Funzione per far partire il navigation intent con una destinazione segnaposto
  */
-private fun startNavigationIntent(
+internal fun startNavigationIntent(
     context: Context,
     place: Place
 ) {
     Log.d("MyTag", place.name)
-    val gmmIntentUri = Uri.parse("google.navigation:q=40.686806972867004, 14.805822890660826")
+    val gmmIntentUri = Uri.parse("google.navigation:q=${place.latitude}, ${place.longitude}")
     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+    mapIntent.addFlags(FLAG_ACTIVITY_NEW_TASK)
     mapIntent.setPackage("com.google.android.apps.maps")
-    mapIntent.resolveActivity(context.packageManager)?.let {
+    try {
         context.startActivity(mapIntent)
+    } catch (ex: ActivityNotFoundException) {
+        Toast.makeText(context, R.string.maps_not_found, Toast.LENGTH_SHORT).show()
     }
+
 }

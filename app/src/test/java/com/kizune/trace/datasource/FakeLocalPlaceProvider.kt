@@ -5,10 +5,7 @@ import com.kizune.trace.R
 import com.kizune.trace.model.Place
 import com.kizune.trace.model.PlaceCategory
 
-/**
- * Provider for places that are local and not fetched through Network
- */
-object LocalPlaceProvider {
+object FakeLocalPlaceProvider {
     val placesList = listOf(
         Place(
             image = R.drawable.cafe1,
@@ -191,5 +188,7 @@ object LocalPlaceProvider {
         )
     ).sortedBy { it.name }
 
-
+    val testCase1 = placesList.subList(0, 2)
+    val testCase2 = placesList.filter { it.category == PlaceCategory.CAFE }
+    val testCase3 = placesList.subList(0, 2)
 }

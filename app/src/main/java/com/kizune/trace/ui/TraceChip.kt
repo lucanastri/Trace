@@ -18,8 +18,8 @@ import com.kizune.trace.model.PlaceCategory
 
 @Composable
 fun TraceChipGroup(
-    selectedCategory: Int,
-    onSelectionChanged: (Int) -> Unit
+    selectedCategory: PlaceCategory,
+    onSelectionChanged: (PlaceCategory) -> Unit
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -28,7 +28,7 @@ fun TraceChipGroup(
         itemsIndexed(enumValues<PlaceCategory>()) { index, category ->
             TraceChip(
                 item = category,
-                isSelected = index == selectedCategory,
+                isSelected = index == selectedCategory.ordinal,
                 onSelectionChanged = { selection ->
                     onSelectionChanged(selection)
                 },
@@ -42,7 +42,7 @@ fun TraceChipGroup(
 fun TraceChip(
     item: PlaceCategory,
     isSelected: Boolean = false,
-    onSelectionChanged: (Int) -> Unit,
+    onSelectionChanged: (PlaceCategory) -> Unit,
 ) {
     Surface(
         elevation = 0.dp,
@@ -58,7 +58,7 @@ fun TraceChip(
                 .toggleable(
                     value = isSelected,
                     onValueChange = {
-                        onSelectionChanged(item.ordinal)
+                        onSelectionChanged(item)
                     }
                 )
                 .padding(

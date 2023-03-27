@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -21,7 +22,9 @@ import androidx.compose.ui.unit.sp
 import com.kizune.trace.R
 import com.kizune.trace.datasource.LocalPlaceProvider
 import com.kizune.trace.model.Place
+import com.kizune.trace.model.PlaceCategory
 import com.kizune.trace.theme.Heebo
+import com.kizune.trace.utils.filterByCriteria
 import com.kizune.trace.utils.printGreeting
 
 @Composable
@@ -31,13 +34,12 @@ fun HomeContentOnly(
 ) {
     val items by remember { mutableStateOf(LocalPlaceProvider.placesList) }
 
-    var selectedCategory by rememberSaveable { mutableStateOf(0) }
+    var selectedCategory by rememberSaveable { mutableStateOf(PlaceCategory.ALL) }
     var textFilter by rememberSaveable { mutableStateOf("") }
 
-    val filteredList = filteredList(
-        items = items,
-        selectedCategory = selectedCategory,
-        searchedText = textFilter
+    val filteredList = items.filterByCriteria(
+        searchedText = textFilter,
+        selectedCategory = selectedCategory
     )
 
     LazyColumn(
@@ -116,7 +118,8 @@ fun HomeScreenSearchView(
             }
         ),
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .testTag("search_view"),
         leadingIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
